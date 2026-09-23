@@ -1,449 +1,219 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🏃 Blocky Run</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎮 Caleb's Game Hub</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(#16002b, #050505);
-      color: white;
-      text-align: center;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #111827, #312e81);
+  color: white;
+  min-height: 100vh;
+}
 
-    #topBar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.75);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header {
+  text-align: center;
+  padding: 35px 20px 25px;
+}
 
-    #topBar h1 {
-      margin: 0;
-      font-size: 22px;
-    }
+header h1 {
+  font-size: 42px;
+  margin: 0 0 10px;
+}
 
-    #score {
-      font-size: 18px;
-      font-weight: bold;
-    }
+header p {
+  color: #c7d2fe;
+  font-size: 18px;
+}
 
-    #home {
-      background: #8000ff;
-      color: white;
-      text-decoration: none;
-      padding: 9px 14px;
-      border-radius: 9px;
-      font-weight: bold;
-    }
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
 
-    canvas {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-    }
+#search {
+  width: min(600px, 90%);
+  padding: 15px 20px;
+  border: none;
+  border-radius: 15px;
+  font-size: 17px;
+  outline: none;
+}
 
-    #startScreen {
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: rgba(5, 0, 10, 0.9);
-      padding: 20px;
-    }
+.games {
+  width: min(1100px, 92%);
+  margin: 30px auto 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
 
-    #startScreen h2 {
-      font-size: 45px;
-      margin: 10px;
-    }
+.game-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 22px;
+  padding: 25px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
 
-    #startScreen p {
-      color: #ccc;
-      font-size: 18px;
-    }
+.game-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
 
-    #startButton {
-      border: none;
-      background: #8000ff;
-      color: white;
-      padding: 16px 35px;
-      border-radius: 12px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 15px;
-    }
+.game-icon {
+  font-size: 70px;
+  margin-bottom: 10px;
+}
 
-    #startButton:hover {
-      background: #a64dff;
-    }
+.game-card h2 {
+  margin: 10px 0;
+  font-size: 25px;
+}
 
-    #jumpButton {
-      position: fixed;
-      right: 25px;
-      bottom: 25px;
-      z-index: 15;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      border: 3px solid white;
-      background: #8000ff;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      touch-action: manipulation;
-    }
+.game-card p {
+  color: #dbeafe;
+  min-height: 48px;
+}
 
-    #gameOver {
-      position: fixed;
-      inset: 0;
-      z-index: 25;
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: rgba(5, 0, 10, 0.92);
-    }
+.play-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 13px 28px;
+  border-radius: 12px;
+  background: #6366f1;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 17px;
+  transition: 0.2s;
+}
 
-    #gameOver h2 {
-      font-size: 45px;
-      margin: 10px;
-    }
+.play-btn:hover {
+  background: #818cf8;
+  transform: scale(1.05);
+}
 
-    #restartButton {
-      border: none;
-      background: #8000ff;
-      color: white;
-      padding: 15px 30px;
-      border-radius: 12px;
-      font-size: 19px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      #topBar h1 {
-        font-size: 17px;
-      }
-
-      #score {
-        font-size: 15px;
-      }
-
-      #home {
-        padding: 7px 10px;
-        font-size: 13px;
-      }
-
-      #startScreen h2,
-      #gameOver h2 {
-        font-size: 35px;
-      }
-    }
-  </style>
-
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #a5b4fc;
+}
+</style>
 </head>
 
 <body>
 
-  <div id="topBar">
-    <h1>🏃 Blocky Run</h1>
+<header>
+  <h1>🎮 Caleb's Game Hub</h1>
+  <p>Welcome! Pick a game and start playing!</p>
+</header>
 
-```
-<div id="score">
-  Score: 0 | Best: 0
+<div class="search-box">
+  <input
+    type="text"
+    id="search"
+    placeholder="🔎 Search games..."
+    onkeyup="searchGames()"
+  >
 </div>
 
-<a
-  id="home"
-  href="https://32calebwhite-bit.github.io/calebs-game-hub/">
-  🏠 HOME
-</a>
-```
+<main class="games" id="games">
 
+  <!-- Chicken Nugget Clicker -->
+  <div class="game-card">
+    <div class="game-icon">🍗</div>
+    <h2>Chicken Nugget Clicker</h2>
+    <p>Click nuggets, buy upgrades, and build your nugget empire!</p>
+
+    <a
+      class="play-btn"
+      href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc0e-d5f1-7336-a2a9-bcda4485b2d9"
+      target="_blank"
+    >
+      ▶ PLAY
+    </a>
   </div>
 
-<canvas id="game"></canvas>
+  <!-- Little Learners -->
+  <div class="game-card">
+    <div class="game-icon">🧠</div>
+    <h2>Little Learners</h2>
+    <p>Learn letters, words, addition, subtraction, and more!</p>
 
-<button id="jumpButton">JUMP</button>
-
-  <div id="startScreen">
-
-```
-<h2>🏃 BLOCKY RUN</h2>
-
-<p>
-  Jump over the blocks and survive as long as possible!
-</p>
-
-<p>
-  🎮 Press SPACE or ↑ to jump
-</p>
-
-<button id="startButton">
-  ▶ START GAME
-</button>
-```
-
+    <a
+      class="play-btn"
+      href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc20-32ac-7eee-af2e-5543fb7b7c5d"
+      target="_blank"
+    >
+      ▶ PLAY
+    </a>
   </div>
 
-  <div id="gameOver">
+  <!-- Steal an Egg -->
+  <div class="game-card">
+    <div class="game-icon">🥚</div>
+    <h2>Steal an Egg</h2>
+    <p>Collect eggs, earn cash, upgrade your base, and protect your loot!</p>
 
-```
-<h2>💥 GAME OVER!</h2>
-
-<p id="finalScore">
-  Score: 0
-</p>
-
-<button id="restartButton">
-  🔄 PLAY AGAIN
-</button>
-```
-
+    <a
+      class="play-btn"
+      href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc6e-b160-7d9c-b35d-066793462bcd"
+      target="_blank"
+    >
+      ▶ PLAY
+    </a>
   </div>
 
-  <script>
+  <!-- Blocky Run -->
+  <div class="game-card">
+    <div class="game-icon">🏃</div>
+    <h2>Blocky Run</h2>
+    <p>Run, jump over obstacles, and try to beat your high score!</p>
 
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");
+    <a
+      class="play-btn"
+      href="blocky-run.html"
+    >
+      ▶ PLAY
+    </a>
+  </div>
 
-    const scoreText = document.getElementById("score");
-    const startScreen = document.getElementById("startScreen");
-    const startButton = document.getElementById("startButton");
-    const gameOverScreen = document.getElementById("gameOver");
-    const restartButton = document.getElementById("restartButton");
-    const jumpButton = document.getElementById("jumpButton");
-    const finalScore = document.getElementById("finalScore");
+</main>
 
-    let W;
-    let H;
+<footer>
+  🎮 Caleb's Game Hub © 2026
+</footer>
 
-    function resizeCanvas() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
+<script>
+function searchGames() {
+  const search = document.getElementById("search").value.toLowerCase();
+  const games = document.querySelectorAll(".game-card");
+
+  games.forEach(game => {
+    const text = game.innerText.toLowerCase();
+
+    if (text.includes(search)) {
+      game.style.display = "";
+    } else {
+      game.style.display = "none";
     }
-
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    let player;
-    let obstacles;
-    let score;
-    let speed;
-    let gameRunning;
-    let lastTime;
-    let obstacleTimer;
-
-    let bestScore =
-      Number(localStorage.getItem("blockyRunBest")) || 0;
-
-    scoreText.textContent =
-      "Score: 0 | Best: " + bestScore;
-
-    function createPlayer() {
-
-      return {
-        x: 100,
-        y: H - 150,
-        width: 45,
-        height: 55,
-        velocityY: 0,
-        jumping: false
-      };
-
-    }
-
-    function resetGame() {
-
-      player = createPlayer();
-
-      obstacles = [];
-
-      score = 0;
-
-      speed = 6;
-
-      obstacleTimer = 0;
-
-      lastTime = performance.now();
-
-      gameRunning = true;
-
-      gameOverScreen.style.display = "none";
-
-      requestAnimationFrame(gameLoop);
-
-    }
-
-    function jump() {
-
-      if (!gameRunning) return;
-
-      if (!player.jumping) {
-
-        player.velocityY = -15;
-
-        player.jumping = true;
-
-      }
-
-    }
-
-    document.addEventListener("keydown", function(event) {
-
-      if (
-        event.code === "Space" ||
-        event.code === "ArrowUp"
-      ) {
-
-        event.preventDefault();
-
-        jump();
-
-      }
-
-    });
-
-    jumpButton.addEventListener("click", jump);
-
-    jumpButton.addEventListener("touchstart", function(event) {
-
-      event.preventDefault();
-
-      jump();
-
-    });
-
-    function spawnObstacle() {
-
-      const height =
-        35 + Math.random() * 45;
-
-      const width =
-        30 + Math.random() * 30;
-
-      obstacles.push({
-
-        x: W + 50,
-
-        y: H - 95 - height,
-
-        width: width,
-
-        height: height
-
-      });
-
-    }
-
-    function collision(a, b) {
-
-      return (
-
-        a.x < b.x + b.width &&
-
-        a.x + a.width > b.x &&
-
-        a.y < b.y + b.height &&
-
-        a.y + a.height > b.y
-
-      );
-
-    }
-
-    function drawBackground() {
-
-      ctx.fillStyle = "#080010";
-
-      ctx.fillRect(0, 0, W, H);
-
-      // Moon
-
-      ctx.fillStyle = "#ffffff";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        W - 100,
-        110,
-        35,
-        0,
-        Math.PI * 2
-      );
-
-      ctx.fill();
-
-      // Buildings
-
-      for (
-        let x = 0;
-        x < W;
-        x += 90
-      ) {
-
-        const height =
-          100 + (x * 7 % 160);
-
-        ctx.fillStyle = "#150025";
-
-        ctx.fillRect(
-          x,
-          H - 80 - height,
-          70,
-          height
-        );
-
-        ctx.fillStyle = "#6500a0";
-
-        for (
-          let y = H - 60 - height;
-          y < H - 100;
-          y += 28
-        ) {
-
-          ctx.fillRect(
-            x + 12,
-            y,
-            10,
-            12
-          );
-
-          ctx.fillRect(
-            x + 40,
-            y,
-            10,
-            12
-          );
-
-        }
-
-      }
-
-      // Ground
-
-      ctx.fillStyle = "#222";
-
-      ctx.fillRect(
-        0,
-        H - 80,
-        W,
+  });
+}
+</script>
+
+</body>
+</html>
+```
