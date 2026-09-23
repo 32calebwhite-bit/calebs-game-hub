@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Caleb's Game Hub</title>
+  <title>🎮 Caleb's Game Hub</title>
 
   <style>
     * {
@@ -27,13 +27,13 @@
     }
 
     .hero {
-      padding: 50px 20px;
+      padding: 55px 20px;
       background: radial-gradient(circle, #35005c, #080808);
     }
 
     .hero h1 {
       font-size: 42px;
-      margin-bottom: 10px;
+      margin: 0 0 10px;
     }
 
     .hero p {
@@ -41,20 +41,37 @@
       color: #ccc;
     }
 
+    .search {
+      width: 90%;
+      max-width: 500px;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      font-size: 17px;
+      margin-top: 20px;
+      outline: none;
+    }
+
     .games {
       display: flex;
       justify-content: center;
       gap: 25px;
       flex-wrap: wrap;
-      padding: 30px 20px;
+      padding: 30px 20px 50px;
     }
 
     .game {
-      width: 270px;
+      width: 280px;
       padding: 20px;
       background: #181818;
       border: 2px solid #800080;
       border-radius: 18px;
+    }
+
+    .game:hover {
+      transform: translateY(-8px);
+      border-color: #c66cff;
+      box-shadow: 0 10px 30px rgba(160, 60, 255, 0.3);
     }
 
     .game-icon {
@@ -69,22 +86,26 @@
 
     .game h2 {
       font-size: 24px;
+      margin-bottom: 10px;
     }
 
     .game p {
       color: #bbb;
-      min-height: 45px;
+      min-height: 55px;
+      line-height: 1.4;
     }
 
     .play {
-      display: block;
-      background: purple;
-      color: white;
+      display: block !important;
+      width: 100%;
+      background: #8000ff;
+      color: white !important;
       padding: 14px;
       border-radius: 10px;
-      text-decoration: none;
+      text-decoration: none !important;
       font-weight: bold;
       margin-top: 15px;
+      cursor: pointer;
     }
 
     .play:hover {
@@ -92,9 +113,8 @@
     }
 
     .creator {
-      padding: 40px 20px;
+      padding: 45px 20px;
       background: #111;
-      margin-top: 20px;
     }
 
     .creator-icon {
@@ -106,80 +126,187 @@
       padding: 25px;
       color: #888;
     }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .game {
+        width: 90%;
+        max-width: 350px;
+      }
+    }
   </style>
 
 </head>
 
 <body>
 
-  <header>
-    🎮 Caleb's Game Hub
-  </header>
+<header>
+  🎮 Caleb's Game Hub
+</header>
 
-  <section class="hero">
-    <h1>Welcome to Caleb's Game Hub! 🎮</h1>
-    <p>Play my games for FREE!</p>
-  </section>
+<section class="hero">
 
-  <h2>🔥 Featured Games</h2>
+  <h1>Welcome to Caleb's Game Hub! 🎮</h1>
 
-  <div class="games">
+  <p>Play my games for FREE!</p>
+
+<input
+ class="search"
+ id="search"
+ placeholder="🔎 Search games..."
+ oninput="searchGames()">
+
+</section>
+
+<h2>🔥 Featured Games</h2>
+
+<div class="games">
+
+  <!-- CHICKEN NUGGET CLICKER -->
+
+  <div class="game">
 
 ```
-<div class="game">
-  <div class="game-icon">🍗</div>
+<div class="game-icon">🍗</div>
 
-  <h2>Nugget Clicker</h2>
+<h2>Chicken Nugget Clicker</h2>
 
-  <p>
-    Click nuggets and buy awesome upgrades!
-  </p>
+<p>
+  Click nuggets, earn money, and buy awesome upgrades!
+</p>
 
-  <a
-    class="play"
-    href="https://codepen.io/Caleb-White-the-decoder/pen/01a0cc0e-d5f1-7336-a2a9-bcda4485b2d9"
-    target="_blank">
-    ▶ PLAY
-  </a>
-</div>
-
-<div class="game">
-  <div class="game-icon">🧠</div>
-
-  <h2>Little Learners</h2>
-
-  <p>
-    Learn words, numbers and math!
-  </p>
-
-  <a
-    class="play"
-    href="https://codepen.io/Caleb-White-the-decoder/pen/01a0cc20-32ac-7eee-af2e-5543fb7b7c5d"
-    target="_blank">
-    ▶ PLAY
-  </a>
-</div>
+<a
+  class="play"
+  href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc0e-d5f1-7336-a2a9-bcda4485b2d9"
+  target="_blank">
+  ▶ PLAY CHICKEN NUGGET CLICKER
+</a>
 ```
 
   </div>
 
-  <div class="creator">
-    <div class="creator-icon">👨‍💻</div>
+  <!-- LITTLE LEARNERS -->
+
+  <div class="game">
 
 ```
-<h2>Created by Caleb</h2>
+<div class="game-icon">🧠</div>
 
-<p>Welcome to my game collection!</p>
+<h2>Little Learners</h2>
+
+<p>
+  Learn words, numbers, addition and subtraction!
+</p>
+
+<a
+  class="play"
+  href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc20-32ac-7eee-af2e-5543fb7b7c5d"
+  target="_blank">
+  ▶ PLAY LITTLE LEARNERS
+</a>
 ```
 
   </div>
 
-  <footer>
-    🎮 Caleb's Game Hub
-    <br><br>
-    Made with HTML, CSS & JavaScript ❤️
-  </footer>
+  <!-- STEAL AN EGG -->
+
+  <div class="game">
+
+```
+<div class="game-icon">🥚</div>
+
+<h2>Steal an Egg</h2>
+
+<p>
+  Steal rare eggs, earn cash, lock your base and climb the leaderboard!
+</p>
+
+<a
+  class="play"
+  href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc6e-b160-7d9c-b35d-066793462bcd"
+  target="_blank">
+  ▶ PLAY STEAL AN EGG
+</a>
+```
+
+  </div>
+
+  <!-- BLOCKY RUN -->
+
+  <div class="game">
+
+```
+<div class="game-icon">🏃</div>
+
+<h2>Blocky Run</h2>
+
+<p>
+  Run, jump over obstacles and beat your high score!
+</p>
+
+<a
+  class="play"
+  href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc7a-0dfc-7dcc-92f8-713012770077"
+  target="_blank">
+  ▶ PLAY BLOCKY RUN
+</a>
+```
+
+  </div>
+
+</div>
+
+<section class="creator">
+
+  <div class="creator-icon">👨‍💻</div>
+
+  <h2>Created by Caleb</h2>
+
+  <p>
+    Welcome to my game collection!
+  </p>
+
+</section>
+
+<footer>
+
+🎮 Caleb's Game Hub
+
+<br><br>
+
+Made with HTML, CSS & JavaScript ❤️
+
+</footer>
+
+<script>
+
+function searchGames() {
+
+  const search =
+    document.getElementById("search").value.toLowerCase();
+
+  const games =
+    document.querySelectorAll(".game");
+
+  games.forEach(game => {
+
+    const text =
+      game.innerText.toLowerCase();
+
+    if (text.includes(search)) {
+      game.style.display = "block";
+    } else {
+      game.style.display = "none";
+    }
+
+  });
+
+}
+
+</script>
 
 </body>
 </html>
-
