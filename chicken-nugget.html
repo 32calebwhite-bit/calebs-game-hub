@@ -1,0 +1,218 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎮 Caleb's Game Hub</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #111827, #312e81);
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 35px 20px 25px;
+}
+
+header h1 {
+  font-size: 42px;
+  margin: 0 0 10px;
+}
+
+header p {
+  color: #c7d2fe;
+  font-size: 18px;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+#search {
+  width: min(600px, 90%);
+  padding: 15px 20px;
+  border: none;
+  border-radius: 15px;
+  font-size: 17px;
+  outline: none;
+}
+
+.games {
+  width: min(1100px, 92%);
+  margin: 30px auto 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.game-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 22px;
+  padding: 25px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.game-icon {
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+
+.game-card h2 {
+  margin: 10px 0;
+  font-size: 25px;
+}
+
+.game-card p {
+  color: #dbeafe;
+  min-height: 48px;
+}
+
+.play-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 13px 28px;
+  border-radius: 12px;
+  background: #6366f1;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 17px;
+  transition: 0.2s;
+}
+
+.play-btn:hover {
+  background: #818cf8;
+  transform: scale(1.05);
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #a5b4fc;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎮 Caleb's Game Hub</h1>
+  <p>Welcome! Pick a game and start playing!</p>
+</header>
+
+<div class="search-box">
+  <input
+    type="text"
+    id="search"
+    placeholder="🔎 Search games..."
+    onkeyup="searchGames()"
+  >
+</div>
+
+<main class="games">
+
+  <!-- Chicken Nugget Clicker -->
+  <div class="game-card">
+    <div class="game-icon">🍗</div>
+    <h2>Chicken Nugget Clicker</h2>
+    <p>Click nuggets, buy upgrades, and build your nugget empire!</p>
+
+    <a
+      class="play-btn"
+      href="chicken-nugget.html"
+    >
+      ▶ PLAY
+    </a>
+  </div>
+
+  <!-- Little Learners -->
+  <div class="game-card">
+    <div class="game-icon">🧠</div>
+    <h2>Little Learners</h2>
+    <p>Learn letters, words, addition, subtraction, and more!</p>
+
+    <a
+      class="play-btn"
+      href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc20-32ac-7eee-af2e-5543fb7b7c5d"
+      target="_blank"
+    >
+      ▶ PLAY
+    </a>
+  </div>
+
+  <!-- Steal an Egg -->
+  <div class="game-card">
+    <div class="game-icon">🥚</div>
+    <h2>Steal an Egg</h2>
+    <p>Collect eggs, earn cash, upgrade your base, and protect your loot!</p>
+
+    <a
+      class="play-btn"
+      href="https://codepen.io/editor/Caleb-White-the-decoder/pen/01a0cc6e-b160-7d9c-b35d-066793462bcd"
+      target="_blank"
+    >
+      ▶ PLAY
+    </a>
+  </div>
+
+  <!-- Blocky Run -->
+  <div class="game-card">
+    <div class="game-icon">🏃</div>
+    <h2>Blocky Run</h2>
+    <p>Run, jump over obstacles, and try to beat your high score!</p>
+
+    <a
+      class="play-btn"
+      href="blocky-run.html"
+    >
+      ▶ PLAY
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  🎮 Caleb's Game Hub © 2026
+</footer>
+
+<script>
+function searchGames() {
+  const search = document.getElementById("search").value.toLowerCase();
+  const games = document.querySelectorAll(".game-card");
+
+  games.forEach(game => {
+    const text = game.innerText.toLowerCase();
+
+    if (text.includes(search)) {
+      game.style.display = "";
+    } else {
+      game.style.display = "none";
+    }
+  });
+}
+</script>
+
+</body>
+</html>
+```
