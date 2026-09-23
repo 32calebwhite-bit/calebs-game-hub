@@ -180,40 +180,4 @@ footer {
   <!-- Blocky Run -->
   <div class="game-card">
     <div class="game-icon">🏃</div>
-    <h2>Blocky Run</h2>
-    <p>Run, jump over obstacles, and try to beat your high score!</p>
-
-    <a
-      class="play-btn"
-      href="blocky-run.html"
-    >
-      ▶ PLAY
-    </a>
-  </div>
-
-</main>
-
-<footer>
-  🎮 Caleb's Game Hub © 2026
-</footer>
-
-<script>
-function searchGames() {
-  const search = document.getElementById("search").value.toLowerCase();
-  const games = document.querySelectorAll(".game-card");
-
-  games.forEach(game => {
-    const text = game.innerText.toLowerCase();
-
-    if (text.includes(search)) {
-      game.style.display = "";
-    } else {
-      game.style.display = "none";
-    }
-  });
-}
-</script>
-
-</body>
-</html>
 ```
